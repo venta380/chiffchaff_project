@@ -16,7 +16,7 @@ pop_code <- read.table("/proj/b2013146/nobackup/analysis/Faheema_analyis/vcftool
 #names(ccm_pca)
 head(cbind(sample.id, pop_code))
 
-snpset <- snpgdsLDpruning(genofile, ld.threshold=0.2)
+snpset <- snpgdsLDpruning(genofile, ld.threshold=0.7)
 names(snpset)
 head(snpset$chr1)
 snpset.id <- unlist(snpset)
