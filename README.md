@@ -30,7 +30,7 @@ The function in  ANGSD_DXY_function in chiffchaf_popgen.py takes two "maf" files
 2,Chr1,30000.0,40000.0,4837.0,4909.0
 ```
 
-The ANGSD_DXY_function can be run using the below command. As the maf files are massive in their memory, please make sure you separate the maf files per each chromosome and run them separately. Mention the key word in the end 'ALLO' or 'SYMP' for allopatric or sympatric. 
+The ANGSD_DXY_function can be run using the below command. As the maf files are massive in their memory, please make sure you separate the maf files per each chromosome and run them separately. Mention the key word in the end 'ALLO' or 'SYMP' for allopatric or sympatric. I've used UPPMAX cluster with 16 cores with 512 GB ram. 
 
 
 ```
@@ -43,7 +43,7 @@ python dxy_angsd_all.py $file_path/Abeitinus_Chr2.csv           $file_path/Trist
 python dxy_angsd_all.py $file_path/Abeitinus_Chr3.csv           $file_path/Tristis_Chr3.csv             $file_path/keys_Chr3.csv Chr3_allo 'ALLO' &
 python dxy_angsd_all.py $file_path/Abeitinus_Chr4.csv           $file_path/Tristis_Chr4.csv             $file_path/keys_Chr4.csv Chr4_allo 'ALLO' &
 python dxy_angsd_all.py $file_path/Abeitinus_Chr4A.csv          $file_path/Tristis_Chr4A.csv            $file_path/keys_Chr4A.csv Chr4A_allo 'ALLO' &
+wait
 ```
-
 
 
