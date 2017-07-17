@@ -24,7 +24,7 @@ angsd -b $outdir/lists/Tristis -anc $ref -setMinDepth 5 -minInd 7 -nThreads 8 -o
 The function in  ANGSD_DXY_function in chiffchaf_popgen.py takes two "maf" files generated using ANGSD and a csv file with chromosome start, end and sites as input(example of format below).
 
 ```
-,CHROM,BIN_START,BIN_END,,Nsites,Nsites_SYM
+,CHROM,BIN_START,BIN_END,Nsites,Nsites_SYM
 0,Chr1,10000.0,20000.0,3542.0,3751.0
 1,Chr1,20000.0,30000.0,6543.0,6578.0
 2,Chr1,30000.0,40000.0,4837.0,4909.0
@@ -45,5 +45,6 @@ python dxy_angsd_all.py $file_path/Abeitinus_Chr4.csv           $file_path/Trist
 python dxy_angsd_all.py $file_path/Abeitinus_Chr4A.csv          $file_path/Tristis_Chr4A.csv            $file_path/keys_Chr4A.csv Chr4A_allo 'ALLO' &
 wait
 ```
+
 
 
