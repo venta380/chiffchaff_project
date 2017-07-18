@@ -405,7 +405,7 @@ def dxy_window_function(file_a,file_b,nextone):
 					if dxy != 0.0:
 						avg_fst.append(fst)
 						avg_dxy.append(dxy)
-		yield [window_index, np.nanmean(avg_dxy), np.nanmean(avg_fst),fixed_diff, private_pop1, private_pop2, shared, fixed_same]
+		yield [window_index, np.nansum(avg_dxy)/(fixed_diff+private_pop1+private_pop2+shared), np.nanmean(avg_fst),fixed_diff, private_pop1, private_pop2, shared, fixed_same]
 
 
 
