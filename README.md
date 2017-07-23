@@ -9,6 +9,14 @@ convert the ped to geno using ped2geno in software sNMF
 ```
 ped2geno plink.ped 
 ```
+# Reference genome:
+The Chiffchaf  refrence used for this study was not denovo assembled but obtained by mapping to the paired end reads to ficedula flycatcher genome. It can be obained by bellow samtools commands using the bam files from ENA (European Nucleotide Archive) bam files ERS1811978, ERS1811977, ERS1811976, ERS1811975. 
+```
+samtools mpileup  -u -f ficAlb2.fa --no-BAQ --count-orphans --min-BQ 5 --bam-list bamlist.txt | bcftools call -c -  > $TMPDIR/consensus_real.vcf
+vcfutils.pl vcf2fq -d 5 -D 8000 $TMPDIR/consensus_real.vcf | gzip >  $TMPDIR/consensus_real.fq.gz
+seqtk seq -a $TMPDIR/consensus_real.fq.gz > consensus_real.fa
+```
+You can also download the refrence from https://www.dropbox.com/s/fdlh2hv5hogib6q/consensus_fix.fa.gz?dl=0
 # Population genetic analysis 
 # chiffchaf_popgen.py
 python package chiffchaf_popgen.py uses python packages like Pandas, numpy and Biopython to calculate some population genetic statistics. Please make sure you check the dependencies in the beginning of the file. 
@@ -24,13 +32,13 @@ angsd -b $outdir/lists/Tristis -anc $ref -setMinDepth 5 -minInd 7 -nThreads 8 -o
 The function in  ANGSD_DXY_function in chiffchaf_popgen.py takes two "maf" files generated using ANGSD and a csv file with chromosome start, end and sites as input(example of format below).
 
 ```
-,CHROM,BIN_START,BIN_END,Nsites,Nsites_SYM
+,CHROM,BIN_START,BIN_END,,Nsites,Nsites_SYM
 0,Chr1,10000.0,20000.0,3542.0,3751.0
 1,Chr1,20000.0,30000.0,6543.0,6578.0
 2,Chr1,30000.0,40000.0,4837.0,4909.0
 ```
 
-The ANGSD_DXY_function can be run using the below command. As the maf files are massive in their memory, please make sure you separate the maf files per each chromosome and run them separately. Mention the key word in the end 'ALLO' or 'SYMP' for allopatric or sympatric. I've used UPPMAX cluster with 16 cores with 512 GB ram. 
+The ANGSD_DXY_function can be run using the below command. As the maf files are massive in their memory, please make sure you separate the maf files per each chromosome and run them separately. Mention the key word in the end 'ALLO' or 'SYMP' for allopatric or sympatric. 
 
 
 ```
@@ -43,7 +51,6 @@ python dxy_angsd_all.py $file_path/Abeitinus_Chr2.csv           $file_path/Trist
 python dxy_angsd_all.py $file_path/Abeitinus_Chr3.csv           $file_path/Tristis_Chr3.csv             $file_path/keys_Chr3.csv Chr3_allo 'ALLO' &
 python dxy_angsd_all.py $file_path/Abeitinus_Chr4.csv           $file_path/Tristis_Chr4.csv             $file_path/keys_Chr4.csv Chr4_allo 'ALLO' &
 python dxy_angsd_all.py $file_path/Abeitinus_Chr4A.csv          $file_path/Tristis_Chr4A.csv            $file_path/keys_Chr4A.csv Chr4A_allo 'ALLO' &
-wait
 ```
 
 
