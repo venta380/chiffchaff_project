@@ -28,6 +28,7 @@ angsd -b $outdir/lists2/Tristis -anc $ref -setMinDepth 5 -minInd 7 -nThreads 16 
 
 realSFS  $outdir/Abeitinus.saf.idx $outdir/Tristis.saf.idx -P 8 > $outdir/Abeitinus.Tristis.ml
 realSFS fst index $outdir/Abeitinus.saf.idx $outdir/Tristis.saf.idx -sfs $outdir/Abeitinus.Tristis.ml -fstout $outdir/Abeitinus.Tristis
+realSFS fst stats2 $outdir/Abeitinus.Tristis.fst.idx -win 10000 -step 10000 > Abeitinus_Tristis.fst
 ```
 
 # Dxy (absolute divergence) between two populations
