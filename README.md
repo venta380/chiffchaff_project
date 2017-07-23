@@ -10,9 +10,9 @@ convert the ped to geno using ped2geno in software sNMF
 ped2geno plink.ped 
 ```
 # Reference genome:
-The Chiffchaf  refrence used for this study was not denovo assembled but obtained by mapping to the paired end reads to ficedula flycatcher genome. It can be obained by bellow samtools commands using the bam files from ENA (European Nucleotide Archive) bam files ERS1811978, ERS1811977, ERS1811976, ERS1811975. 
+The Chiffchaf  refrence used for this study was not de novo assembled but obtained by mapping the paired end reads to ficedula flycatcher genome. It can be obained by bellow samtools commands using the bam files from ENA (European Nucleotide Archive) bam files ERS1811978, ERS1811977, ERS1811976, ERS1811975. 
 ```
-samtools mpileup  -u -f ficAlb2.fa --no-BAQ --count-orphans --min-BQ 5 --bam-list bamlist.txt | bcftools call -c -  > $TMPDIR/consensus_real.vcf
+samtools mpileup  -u -f ficAlb2.fa --no-BAQ --count-orphans --min-BQ 1 --bam-list bamlist.txt | bcftools call -c -  > $TMPDIR/consensus_real.vcf
 vcfutils.pl vcf2fq -d 5 -D 8000 $TMPDIR/consensus_real.vcf | gzip >  $TMPDIR/consensus_real.fq.gz
 seqtk seq -a $TMPDIR/consensus_real.fq.gz > consensus_real.fa
 ```
