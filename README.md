@@ -10,7 +10,7 @@ convert the ped to geno using ped2geno in software sNMF
 ped2geno plink.ped 
 ```
 # Reference genome:
-The Chiffchaf  refrence used for this study was not denovo assembled but obtained by mapping to the paired end reads to ficedula flycatcher genome. It can be obained by bellow samtools commands using the bam files from ENA (European Nucleotide Archive) bam files ERS1811978, ERS1811977, ERS1811976, ERS1811975. 
+The Chiffchaf  refrence used for this study was not denovo assembled but obtained by mapping the paired end reads to ficedula flycatcher genome. It can be obained by bellow samtools commands using the bam files from ENA (European Nucleotide Archive) ERS1811978, ERS1811977, ERS1811976, ERS1811975. 
 ```
 samtools mpileup  -u -f ficAlb2.fa --no-BAQ --count-orphans --min-BQ 5 --bam-list bamlist.txt | bcftools call -c -  > $TMPDIR/consensus_real.vcf
 vcfutils.pl vcf2fq -d 5 -D 8000 $TMPDIR/consensus_real.vcf | gzip >  $TMPDIR/consensus_real.fq.gz
@@ -23,13 +23,14 @@ python package chiffchaf_popgen.py uses python packages like Pandas, numpy and B
 # Fst (genetic differentiation) between populations
 Fst was calculated by below commands using ANGSD
 ```
-angsd -b $outdir/lists2/Abeitinus -anc $ref -setMinDepth 5 -minInd 7 -nThreads 16 -out $outdir/Abeitinus -dosaf 1 -gl 2  -doMaf 8 -doMajorMinor 2 -doCounts 1 -fold 1 
-angsd -b $outdir/lists2/Tristis -anc $ref -setMinDepth 5 -minInd 7 -nThreads 16 -out $outdir/Tristis -dosaf 1 -gl 2  -doMaf 8 -doMajorMinor 2 -doCounts 1 -fold 1
-
-realSFS  $outdir/Abeitinus.saf.idx $outdir/Tristis.saf.idx -P 8 > $outdir/Abeitinus.Tristis.ml
-realSFS fst index $outdir/Abeitinus.saf.idx $outdir/Tristis.saf.idx -sfs $outdir/Abeitinus.Tristis.ml -fstout $outdir/Abeitinus.Tristis
-realSFS fst stats2 $outdir/Abeitinus.Tristis.fst.idx -win 10000 -step 10000 > Abeitinus_Tristis.fst
+angsd -b $outdir/lists2/Abeitinus -anc $ref -setMinDepth 5 -minInd 7 -nThreads 16 -out $outdir/Abeitinus_Sym -dosaf 1 -gl 2  -doMaf 8 -doMajorMinor 2 -doCounts 1 -fold 1 
+angsd -b $outdir/lists2/Tristis -anc $ref -setMinDepth 5 -minInd 7 -nThreads 16 -out $outdir/Tristis_Sym -dosaf 1 -gl 2  -doMaf 8 -doMajorMinor 2 -doCounts 1 -fold 1
 ```
+
+realSFS  $outdir/Abeitinus_Sym.saf.idx $outdir/Tristis_Sym.saf.idx -P 8 > $outdir/Abeitinus2.Tristis2.ml
+realSFS fst index $outdir/Abeitinus_Sym.saf.idx $outdir/Tristis_Sym.saf.idx \
+-sfs $outdir/Abeitinus2.Tristis2.ml -fstout $outdir/Abeitinus2.Tristis2
+
 
 # Dxy (absolute divergence) between two populations
 
@@ -63,6 +64,5 @@ python dxy_angsd_all.py $file_path/Abeitinus_Chr3.csv           $file_path/Trist
 python dxy_angsd_all.py $file_path/Abeitinus_Chr4.csv           $file_path/Tristis_Chr4.csv             $file_path/keys_Chr4.csv Chr4_allo 'ALLO' &
 python dxy_angsd_all.py $file_path/Abeitinus_Chr4A.csv          $file_path/Tristis_Chr4A.csv            $file_path/keys_Chr4A.csv Chr4A_allo 'ALLO' &
 ```
-
 
 
