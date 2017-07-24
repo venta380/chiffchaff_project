@@ -57,12 +57,12 @@ The ANGSD_DXY_function can be run using the below command. As the maf files are 
 python dxy_angsd_all.py pop1.maf pop2.maf keys.csv output_name 'ALLO/SYMP' &
 ```
 ```
-python dxy_angsd_all.py $file_path/Abeitinus_Chr1.csv           $file_path/Tristis_Chr1.csv             $file_path/keys_Chr1.csv Chr1_allo 'ALLO' &
-python dxy_angsd_all.py $file_path/Abeitinus_Chr1A.csv          $file_path/Tristis_Chr1A.csv            $file_path/keys_Chr1A.csv Chr1A_allo 'ALLO' &
-python dxy_angsd_all.py $file_path/Abeitinus_Chr2.csv           $file_path/Tristis_Chr2.csv             $file_path/keys_Chr2.csv Chr2_allo 'ALLO' &
-python dxy_angsd_all.py $file_path/Abeitinus_Chr3.csv           $file_path/Tristis_Chr3.csv             $file_path/keys_Chr3.csv Chr3_allo 'ALLO' &
-python dxy_angsd_all.py $file_path/Abeitinus_Chr4.csv           $file_path/Tristis_Chr4.csv             $file_path/keys_Chr4.csv Chr4_allo 'ALLO' &
-python dxy_angsd_all.py $file_path/Abeitinus_Chr4A.csv          $file_path/Tristis_Chr4A.csv            $file_path/keys_Chr4A.csv Chr4A_allo 'ALLO' &
+python dxy_angsd_all.py $file_path/Abeitinus_Chr1.csv           $file_path/Tristis_Chr1.csv             $file_path/keys_Chr1.csv Chr1_allo 'ALLO' 
+python dxy_angsd_all.py $file_path/Abeitinus_Chr1A.csv          $file_path/Tristis_Chr1A.csv            $file_path/keys_Chr1A.csv Chr1A_allo 'ALLO' 
+python dxy_angsd_all.py $file_path/Abeitinus_Chr2.csv           $file_path/Tristis_Chr2.csv             $file_path/keys_Chr2.csv Chr2_allo 'ALLO' 
+python dxy_angsd_all.py $file_path/Abeitinus_Chr3.csv           $file_path/Tristis_Chr3.csv             $file_path/keys_Chr3.csv Chr3_allo 'ALLO' 
+python dxy_angsd_all.py $file_path/Abeitinus_Chr4.csv           $file_path/Tristis_Chr4.csv             $file_path/keys_Chr4.csv Chr4_allo 'ALLO' 
+python dxy_angsd_all.py $file_path/Abeitinus_Chr4A.csv          $file_path/Tristis_Chr4A.csv            $file_path/keys_Chr4A.csv Chr4A_allo 'ALLO' 
 ```
 
 
