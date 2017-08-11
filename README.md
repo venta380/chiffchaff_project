@@ -10,13 +10,13 @@ convert the ped to geno using ped2geno in software sNMF
 ped2geno plink.ped 
 ```
 # Reference genome:
-The Chiffchaf  refrence used for this study was not denovo assembled but obtained by mapping the paired end reads to ficedula flycatcher genome. It can be obained by bellow samtools commands using the bam files from ENA (European Nucleotide Archive) ERS1811978, ERS1811977, ERS1811976, ERS1811975. 
+The Chiffchaf  reference used for this study was not denovo assembled but obtained by mapping the paired end reads to ficedula flycatcher genome. It can be obtained by bellow samtools commands using the bam files from ENA (European Nucleotide Archive) ERS1811978, ERS1811977, ERS1811976, ERS1811975. 
 ```
 samtools mpileup  -u -f ficAlb2.fa --no-BAQ --count-orphans --min-BQ 5 --bam-list bamlist.txt | bcftools call -c -  > $TMPDIR/consensus_real.vcf
 vcfutils.pl vcf2fq -d 5 -D 8000 $TMPDIR/consensus_real.vcf | gzip >  $TMPDIR/consensus_real.fq.gz
 seqtk seq -a $TMPDIR/consensus_real.fq.gz > consensus_real.fa
 ```
-You can also download the refrence from https://www.dropbox.com/s/fdlh2hv5hogib6q/consensus_fix.fa.gz?dl=0
+You can also download the reference from https://www.dropbox.com/s/fdlh2hv5hogib6q/consensus_fix.fa.gz?dl=0
 # Population genetic analysis 
 # chiffchaf_popgen.py
 python package chiffchaf_popgen.py uses python packages like Pandas, numpy and Biopython to calculate some population genetic statistics. Please make sure you check the dependencies in the beginning of the file. 
@@ -41,7 +41,7 @@ angsd -b $outdir/lists/Abeitinus -anc $ref -setMinDepth 5 -minInd 7 -nThreads 8 
 angsd -b $outdir/lists/Tristis -anc $ref -setMinDepth 5 -minInd 7 -nThreads 8 -out $outdir/Tristis -doMajorMinor 1 -doMaf 1 -gl 2 
 ```
 
-The function in  ANGSD_DXY_function in chiffchaf_popgen.py takes two "maf" files generated using ANGSD and a csv file with chromosome start, end and sites as input(example of format below).
+The function in ANGSD_DXY_function in chiffchaf_popgen.py takes two "maf" files generated using ANGSD and a csv file with chromosome start, end and sites as input(example of format below).
 
 ```
 ,CHROM,BIN_START,BIN_END,,Nsites,Nsites_SYM
@@ -63,6 +63,20 @@ python dxy_angsd_all.py $file_path/Abeitinus_Chr2.csv           $file_path/Trist
 python dxy_angsd_all.py $file_path/Abeitinus_Chr3.csv           $file_path/Tristis_Chr3.csv             $file_path/keys_Chr3.csv Chr3_allo 'ALLO' 
 python dxy_angsd_all.py $file_path/Abeitinus_Chr4.csv           $file_path/Tristis_Chr4.csv             $file_path/keys_Chr4.csv Chr4_allo 'ALLO' 
 python dxy_angsd_all.py $file_path/Abeitinus_Chr4A.csv          $file_path/Tristis_Chr4A.csv            $file_path/keys_Chr4A.csv Chr4A_allo 'ALLO' 
+```
+# LD (linkage disequilibrium analysis)
+Perpare the files for the analysis using the filtering schema. 
+
+```
+vcftools --vcf Abeitinus.recode.vcf       --recode --out ./LD_venkat/Abeitinus        --max-missing-count 3
+plink --allow-extra-chr --chr-set 33 --recode --out ./LD_venkat/Abeitinus        --vcf ./LD_venkat/Abeitinus.recode.vcf      
+plink --allow-extra-chr --chr-set 33 --file ./LD_venkat/Abeitinus       --out ./LD_venkat/Abeitinus       --r2
+#to check the averege r2 for windows of 10 kb accross genome
+plink --allow-extra-chr --chr-set 33 --file ./LD_venkat/Abeitinus --ld-window 2 --ld-window-kb 10 --ld-window-r2 0 --maf 0.2 --out ./LD_venkat/Abeitinus_window --r2
+```
+use the outputs as the input for LD.py
+```
+LD.py Abeitinus_window.ld
 ```
 
 
