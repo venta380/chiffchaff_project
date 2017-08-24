@@ -1,16 +1,3 @@
-"""
-###python scrypt to obtain concensus sequence from readcount.
-###this script will provide concensus based on the ocuuring nucleotides in a specific position and convert them to IUPAC CODES.
-##dependencies: python2
-##usage: python2 getfasta2.py [readcount.txt] > output.fasta
-##example: python getfasta2.py test.readcount > test.fasta
-#####################################
-#####        Venkat Talla       #####
-#####   Venkat.Talla@ebc.uu.se  #####
-#####        Backstrom Lab      #####
-#####################################
-"""
-
 import random
 import sys
 import string
